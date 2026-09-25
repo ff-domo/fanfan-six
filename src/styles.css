@@ -1,6 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
-
-:root { font-family: 'Noto Serif SC', serif; color: #fff5dc; background: #691c13; font-synthesis: none; text-rendering: optimizeLegibility; }
+:root { font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', 'PingFang SC', serif; color: #fff5dc; background: #691c13; font-synthesis: none; text-rendering: optimizeLegibility; }
 * { box-sizing: border-box; }
 html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
 body { background: #691c13; }
