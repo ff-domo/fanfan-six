@@ -366,6 +366,7 @@ function App() {
           <span className="brand-seal">月</span>
           <span><strong>月满</strong><small>中秋祝福笺</small></span>
         </button>
+        <span className="creator-credit creator-credit-header">创作者 · 范孝璁</span>
         <div className="header-tools">
           <span className="date-label">{dateText}</span>
           <button className={`music-button ${musicOn ? 'playing' : ''}`} onClick={toggleMusic} title={musicOn ? '关闭音乐' : '开启音乐'} aria-label={musicOn ? '关闭音乐' : '开启音乐'}>
@@ -405,6 +406,7 @@ function App() {
           {chapterIndex === 5 && <button className="scene-floating-moon" onClick={handleMoonClick} aria-label="点击月亮进入下一页"><span>生活</span><i /></button>}
           {chapterIndex === 6 && <button className="scene-luck-mooncake" onClick={handleLuckMooncakeClick} aria-label="点击好运月饼进入下一页"><span>好运</span><i /></button>}
           {chapterIndex === 7 && <button className="scene-jade-rabbit" onClick={restartStory} aria-label="点击玉兔重新开始"><span>玉兔</span></button>}
+          {chapterIndex >= 1 && chapterIndex <= 6 && <span className="scene-tap-hint">点击此处</span>}
         </div>
         {chapterIndex === 7 && (
           <div className="final-actions">
@@ -418,6 +420,7 @@ function App() {
       <footer className="story-footer">
         <div className="progress"><span>0{chapterIndex}</span><div className="progress-track"><i style={{ width: `${(chapterIndex / 7) * 100}%` }} /></div><span>07</span></div>
         <div className="next-hint"><span>{isIntro ? '输入名字后开启' : chapterIndex < 7 ? '完成本页互动后继续' : '祝福已送达'}</span><Heart size={15} /></div>
+        <span className="creator-credit creator-credit-footer">创作者 · 范孝璁</span>
       </footer>
 
       <div className="chapter-dots" aria-label="章节导航">{Array.from({ length: 8 }, (_, index) => <button key={index} className={`${index === chapterIndex ? 'active' : ''} ${unlocked[index] ? 'unlocked' : 'locked'}`} onClick={() => changeChapter(index, index < chapterIndex ? 'prev' : 'next')} aria-label={unlocked[index] ? `第${index}页` : `第${index}页未解锁`} />)}</div>
