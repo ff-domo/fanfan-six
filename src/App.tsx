@@ -27,7 +27,7 @@ type FallingCake = {
 }
 
 const introChapter: Chapter = {
-  image: '/references/page-1.jpg',
+  image: 'references/page-1.jpg',
   number: '00',
   eyebrow: 'A PERSONAL MID-AUTUMN LETTER',
   title: '写下你的名字，收下这轮月光',
@@ -36,13 +36,13 @@ const introChapter: Chapter = {
 }
 
 const chapters: Chapter[] = [
-  { image: '/references/page-1.jpg', number: '01', eyebrow: '见字如面 · A LETTER UNDER THE MOON', title: '见字如面', description: '{name}，见字如面。\n今夜月光很轻，刚好载得动一句想念。', hint: '点击月亮，进入下一页' },
-  { image: '/references/page-2.jpg', number: '02', eyebrow: '月圆人愿 · MAKE A WISH', title: '月圆人愿', description: '月亮慢慢变圆，\n事情也会慢慢如愿。\n愿你所念之人，平安喜乐。', hint: '点击月亮，继续赏月' },
-  { image: '/references/page-3.jpg', number: '03', eyebrow: '思念寄月 · SEND A WISH', title: '思念寄月', description: '如果今晚不能回家，\n就让桂香替你翻山越岭，\n让月光替我说一句：想你。', hint: '完成小游戏，解锁下一页' },
-  { image: '/references/page-4.jpg', number: '04', eyebrow: '团圆有暖 · HOME IS HERE', title: '团圆有暖', description: '{name}，愿你手里有月饼，\n身边有家人，\n心里有归处。', hint: '点亮团圆灯，解锁下一页' },
-  { image: '/references/page-5.jpg', number: '05', eyebrow: '生活如月 · BRIGHT AND TENDER', title: '生活如月', description: '愿你的生活，\n像今晚的月亮，\n明亮，圆满，温柔。', hint: '点击月光，继续收下祝福' },
-  { image: '/references/page-2.jpg', number: '06', eyebrow: '好运常伴 · GOOD LUCK STAYS', title: '好运常伴', description: '把烦恼交给晚风，\n把思念寄给月亮，\n把好运留在{name}身边。', hint: '点击桂枝，继续向前' },
-  { image: '/references/page-5.jpg', number: '07', eyebrow: 'A WISH FOR YOU', title: '中秋快乐', description: '中秋快乐，{name}。\n愿你岁岁常欢愉，年年皆胜意。', hint: '祝福已送达' },
+  { image: 'references/page-1.jpg', number: '01', eyebrow: '见字如面 · A LETTER UNDER THE MOON', title: '见字如面', description: '{name}，见字如面。\n今夜月光很轻，刚好载得动一句想念。', hint: '点击月亮，进入下一页' },
+  { image: 'references/page-2.jpg', number: '02', eyebrow: '月圆人愿 · MAKE A WISH', title: '月圆人愿', description: '月亮慢慢变圆，\n事情也会慢慢如愿。\n愿你所念之人，平安喜乐。', hint: '点击月亮，继续赏月' },
+  { image: 'references/page-3.jpg', number: '03', eyebrow: '思念寄月 · SEND A WISH', title: '思念寄月', description: '如果今晚不能回家，\n就让桂香替你翻山越岭，\n让月光替我说一句：想你。', hint: '完成小游戏，解锁下一页' },
+  { image: 'references/page-4.jpg', number: '04', eyebrow: '团圆有暖 · HOME IS HERE', title: '团圆有暖', description: '{name}，愿你手里有月饼，\n身边有家人，\n心里有归处。', hint: '点亮团圆灯，解锁下一页' },
+  { image: 'references/page-5.jpg', number: '05', eyebrow: '生活如月 · BRIGHT AND TENDER', title: '生活如月', description: '愿你的生活，\n像今晚的月亮，\n明亮，圆满，温柔。', hint: '点击月光，继续收下祝福' },
+  { image: 'references/page-2.jpg', number: '06', eyebrow: '好运常伴 · GOOD LUCK STAYS', title: '好运常伴', description: '把烦恼交给晚风，\n把思念寄给月亮，\n把好运留在{name}身边。', hint: '点击桂枝，继续向前' },
+  { image: 'references/page-5.jpg', number: '07', eyebrow: 'A WISH FOR YOU', title: '中秋快乐', description: '中秋快乐，{name}。\n愿你岁岁常欢愉，年年皆胜意。', hint: '祝福已送达' },
 ]
 
 const blessingLines = ['愿你有月可赏，有人相伴。', '愿家人闲坐，灯火可亲。', '愿生活明朗，万物可爱。', '愿这一轮月光，照亮你的来路。']
