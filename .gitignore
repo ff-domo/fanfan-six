@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vscode/
+.DS_Store
+
+# 构建产物
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# 未完成下载 / 原始素材（未使用，不上传）
+*.crdownload
+/family.jpg
+/family-new.jpg
+/微信图片_*.jpg
