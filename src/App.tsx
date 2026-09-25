@@ -84,6 +84,7 @@ function App() {
   const cakesRef = useRef<FallingCake[]>([])
   const lastFrameRef = useRef(0)
   const cakeIdRef = useRef(0)
+  const cakeNodesRef = useRef(new Map<number, HTMLSpanElement>())
   const chapter = chapters[Math.max(0, chapterIndex - 1)] ?? chapters[0]
   const isIntro = chapterIndex === 0
   const contentIndex = chapterIndex - 1
@@ -108,10 +109,13 @@ function App() {
   }, [])
 
   useEffect(() => {
-    chapters.forEach((chapter) => {
-      const image = new Image()
-      image.src = chapter.image
-    })
+    const timer = window.setTimeout(() => {
+      chapters.forEach((chapter) => {
+        const image = new Image()
+        image.src = chapter.image
+      })
+    }, 1500)
+    return () => window.clearTimeout(timer)
   }, [])
 
   useEffect(() => {
@@ -204,11 +208,11 @@ function App() {
     gameLivesRef.current = 3
     setGameWon(false)
     setGameMessage('拖动玉兔篮，接住落下的月饼')
-    const initialCakes = Array.from({ length: 3 }, (_, index) => ({
+    const initialCakes = Array.from({ length: 2 }, (_, index) => ({
       id: index,
-      x: 18 + index * 31,
-      y: -16 - index * 25,
-      speed: 22 + index * 5,
+      x: 22 + index * 52,
+      y: -12 - index * 28,
+      speed: 16 + index * 3,
     }))
     cakesRef.current = initialCakes
     setCakes(initialCakes)
@@ -264,12 +268,12 @@ function App() {
         const nextCakes = cakesRef.current
           .map((cake) => ({ ...cake, y: cake.y + cake.speed * delta }))
           .filter((cake) => {
-            const hit = cake.y > 78 && cake.y < 91 && Math.abs(cake.x - basketCenter) < 12
+            const hit = cake.y > 76 && cake.y < 94 && Math.abs(cake.x - basketCenter) < 16
             if (hit) {
               gameScoreRef.current += 1
               setGameScore(gameScoreRef.current)
-              setGameMessage(gameScoreRef.current >= 5 ? '月饼接满了，团圆好运已收下' : '接住了！继续保持')
-              if (gameScoreRef.current >= 5) finishGame(true)
+              setGameMessage(gameScoreRef.current >= 3 ? '月饼接满了，团圆好运已收下' : '接住了！继续保持')
+              if (gameScoreRef.current >= 3) finishGame(true)
               return false
             }
             if (cake.y > 104) {
@@ -281,11 +285,17 @@ function App() {
             }
             return true
           })
-        if (nextCakes.length < 3 && gameLivesRef.current > 0 && gameScoreRef.current < 5) {
+        if (nextCakes.length < 2 && gameLivesRef.current > 0 && gameScoreRef.current < 3) {
           nextCakes.push({ id: cakeIdRef.current++, x: 10 + Math.random() * 80, y: -12, speed: 20 + Math.random() * 15 })
         }
         cakesRef.current = nextCakes
-        setCakes(nextCakes)
+        nextCakes.forEach((cake) => {
+          const node = cakeNodesRef.current.get(cake.id)
+          if (node) {
+            node.style.left = `${cake.x}%`
+            node.style.top = `${cake.y}%`
+          }
+        })
       }
       gameLoop.current = requestAnimationFrame(frame)
     }
@@ -335,7 +345,7 @@ function App() {
       className={`scroll-story ${transitioning ? 'is-transitioning' : ''} ${burst ? 'is-bursting' : ''}`}
       style={{ '--pointer-x': pointer.x, '--pointer-y': pointer.y } as React.CSSProperties}
     >
-      <audio ref={audioRef} loop preload="auto" src={`${import.meta.env.BASE_URL}audio/国风中秋夜-花好月圆-汉服古装配乐_爱给网_aigei_com.mp3`} onError={() => { setMusicOn(false); setMusicMessage('音乐加载失败，请检查音频文件格式') }} />
+      <audio ref={audioRef} loop preload="none" src={`${import.meta.env.BASE_URL}audio/国风中秋夜-花好月圆-汉服古装配乐_爱给网_aigei_com.mp3`} onError={() => { setMusicOn(false); setMusicMessage('音乐加载失败，请检查音频文件格式') }} />
       <div key={chapterIndex} className="story-image" style={{ backgroundImage: `url("${currentChapter.image}")` }} />
       <div className="story-image-overlay" />
       <div className="story-grain" />
@@ -423,7 +433,7 @@ function App() {
           <div ref={gameBoardRef} className="game-board" onPointerMove={handleGamePointerMove} onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); moveBasket(event.clientX) }}>
             <div className="game-moonline" />
             <div className="game-basket" style={{ left: `${basketX}%` }}><span>玉兔篮</span></div>
-            {cakes.map((cake) => <span key={cake.id} className="falling-mooncake" style={{ left: `${cake.x}%`, top: `${cake.y}%` }}><span>月</span></span>)}
+            {cakes.map((cake) => <span key={cake.id} ref={(node) => { if (node) cakeNodesRef.current.set(cake.id, node); else cakeNodesRef.current.delete(cake.id) }} className="falling-mooncake" style={{ left: `${cake.x}%`, top: `${cake.y}%` }}><span>月</span></span>)}
             {gameWon && <div className="game-success"><Heart size={22} fill="currentColor" /> 团圆接满，下一页见</div>}
           </div>
           <p className="game-live-message">{gameMessage}</p>
